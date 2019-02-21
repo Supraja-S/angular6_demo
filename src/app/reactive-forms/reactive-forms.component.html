@@ -1,0 +1,63 @@
+<div class="container col-5 float-left">
+<form  [formGroup]="profileForm"  novalidate (ngSubmit)="onSubmit(templateForm)">
+  <div class="form-group">
+      <label for="firstName">First Name</label>
+      <input type="text" class="form-control" name="firstName" formControlName="firstName"/>
+  </div>
+  <div *ngIf="(profileForm.get('firstName').touched)"
+    class="alert alert-danger">
+    <div *ngIf="profileForm.get('firstName').errors?.required">
+      Name is required.
+    </div>
+    <div *ngIf="profileForm.get('firstName').errors?.minlength">
+      Name must be at least 4 characters long.
+    </div>
+    <div *ngIf="profileForm.get('firstName').errors?.forbiddenName">
+        This is a forbidden Name
+      </div>
+  </div>
+  <div class="form-group">
+    <label for="lastname">Last Name</label>
+    <input type="text" class="form-control" name="lastname" formControlName="lastName"/>
+</div>
+  <div class="form-group">
+      <label for="name">Mobile Number</label>
+      <input type="text" class="form-control" name="phoneNum" formControlName="phoneNumber"/>
+  </div>
+  <div class="form-group">
+      <label for="name">Email</label>
+      <input type="text" class="form-control" name="email" formControlName="email"/>
+  </div>
+  <div *ngIf="(profileForm.get('email').touched)"
+  class="alert alert-danger">
+  <div *ngIf="(profileForm.get('email').errors.required)">
+    Email is required
+  </div>
+</div>
+  <div formGroupName="address">
+    <h3>Address</h3>
+
+    <label class="mx-2">
+      Street:
+      <input type="text" class="form-control"  formControlName="street">
+    </label>
+
+    <label class="mx-2">
+      City:
+      <input type="text" class="form-control"  formControlName="city">
+    </label>
+    
+    <label class="mx-2">
+      State:
+      <input type="text" class="form-control"  formControlName="state">
+    </label>
+
+    <label class="mx-2">
+      Zip Code:
+      <input type="text" class="form-control"  formControlName="zip">
+    </label>
+  </div>
+  <button type="submit" [disabled]="!profileForm.valid">Submit</button>
+</form>
+Form Data - {{profileForm.value | json}}
+</div>

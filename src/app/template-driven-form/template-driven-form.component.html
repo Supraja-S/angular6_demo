@@ -1,0 +1,35 @@
+<h3>template-driven-form</h3>
+<div class="container col-5 float-left">
+<form #templateForm="ngForm" novalidate (ngSubmit)="onSubmit(templateForm)">
+  <div class="form-group">
+      <label for="firstname">First Name</label>
+      <input type="text" class="form-control" name="firstname" [(ngModel)]="firstname" #fName="ngModel" required pattern="[a-zA-Z][a-zA-Z ]+" minlength="3"/>
+  </div>
+  <div class="alert alert-danger text-danger" *ngIf="fName.touched">
+      <div class="" *ngIf="fName.errors?.required">Please Enter  First Name</div>
+      <div class="" *ngIf="!fName.errors?.valid">Please Enter valid  First Name</div>
+  </div>
+  <div class="form-group">
+    <label for="lastname">Last Name</label>
+    <input type="text" class="form-control" name="lastname" [(ngModel)]="lastname" />
+</div>
+<div class="form-group">
+    <label for="empId">Employee Id</label>
+    <input type="text" class="form-control" name="empId" [(ngModel)]="empId" required maxlength="6" pattern="^[0-9]*$"/>
+</div>
+  <div class="form-group">
+      <label for="name">Mobile Number</label>
+      <input type="text" class="form-control" name="phoneNum" [(ngModel)]="phoneNum" required maxlength="10" pattern="^[0-9]$"/>
+  </div>
+  <div class="form-group">
+      <label for="name">Email</label>
+      <input type="text" class="form-control" name="email" [(ngModel)]="email" required pattern="^[a-z]+[a-z0-9._]+@[a-z]+\.[a-z.]{2,5}$" #emailId="ngModel"/>
+  </div>
+  <div class="alert alert-danger text-danger" *ngIf="emailId.touched && emailId.errors">
+        <div class="" *ngIf="emailId.errors?.required">Email is required</div>
+        <div class="" *ngIf="!(emailId.errors?.valid)">Please Enter valid  Email</div>
+    </div>
+  <button type="submit" [disabled]="!templateForm.valid">Submit</button>
+</form>
+Form Data - {{templateForm.value | json}}
+</div>
